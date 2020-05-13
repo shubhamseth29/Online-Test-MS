@@ -1,10 +1,13 @@
 package com.cg.testmgmt.dto;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class TestDto {
+	
+	private BigInteger testId;
 	private String testTitle;
 	private LocalTime testDuration;
 	private BigDecimal testTotalMarks;
@@ -58,6 +61,14 @@ public class TestDto {
 
 	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
+	}
+
+	public BigInteger getTestId() {
+		return testId;
+	}
+
+	public void setTestId(BigInteger testId) {
+		this.testId = testId;
 	}
 
 }

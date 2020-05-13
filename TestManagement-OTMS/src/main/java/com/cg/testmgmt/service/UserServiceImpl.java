@@ -28,6 +28,17 @@ public class UserServiceImpl implements IUserService {
 		user = userDao.save(user);
 		return user;
 	}
+	
+	@Override
+	public User updateUser(Long userId, User user) {
+		boolean exists =userDao.existsById(userId);
+		if (exists) {
+			user = userDao.save(user);
+			return user;
+		}
+		throw new UserNotFoundException("User not found for id="+userId);
+	}
+
 
 	@Override
 	public User findById(Long userId) {
@@ -37,6 +48,15 @@ public class UserServiceImpl implements IUserService {
 			return user;
 		}
 		throw new UserNotFoundException("User not found for id=" + userId);
+	}
+
+	@Override
+	public User deleteUser(Long userId) {
+		
+		User test = findById(userId);
+		userDao.delete(test);
+		return test;
+		
 	}
 
 }

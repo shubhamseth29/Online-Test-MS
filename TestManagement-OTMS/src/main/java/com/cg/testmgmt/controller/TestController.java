@@ -9,7 +9,6 @@ import java.util.List;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
-import com.cg.testmgmt.dto.AssignTestDto;
 import com.cg.testmgmt.dto.TestDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +33,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/tests")
-public class TestRestController {
+public class TestController {
 	
-	  private static final Logger Log= LoggerFactory.getLogger(TestRestController.class);
+	  private static final Logger Log= LoggerFactory.getLogger(TestController.class);
 	 @Autowired
 	 private ITestService service;
 	 @GetMapping("/get/{id}")
@@ -57,11 +56,23 @@ public class TestRestController {
 		return details;
 	}
 	
-	
+//	List<TestDto> convertToTestDto(Test test)
+//	{
+//		TestDto dto=new TestDto();
+//		dto.setTestTitle(test.getTestTitle());
+//		dto.setTestDuration(test.getTestDuration());
+//		dto.setTestTotalMarks(test.getTestMarksScored());
+//		dto.setTestMarksScored(test.getTestMarksScored());
+//		dto.setStartTime(test.getStartTime());
+//		dto.setEndTime(test.getEndTime());
+//		
+//	}
+//	
 //	 @GetMapping
 //	   public ResponseEntity<List<TestDto>>fetchAll(){
-//	       List<TestDto>tests=service.fetchAll();
-//	       ResponseEntity<List<TestDto>>response=new ResponseEntity<>(tests,HttpStatus.OK);
+//	       List<Test> tests=service.fetchAll();
+//	       	List<TestDto> dto=convertToTestDto(tests);
+//	       ResponseEntity<List<TestDto>>response=new ResponseEntity<>(dto,HttpStatus.OK);
 //	       return response;
 //	   }
 //	 
@@ -99,9 +110,10 @@ public class TestRestController {
 			return response;
 		}
 	 
-	 @PostMapping("/assign")
-		public ResponseEntity<Boolean> assignTest(@RequestBody @Valid AssignTestDto assignTestDto) {
-			Boolean isAssign = service.assignTest(assignTestDto.getUserId(), assignTestDto.getTestId());
+	 @GetMapping("/assign/{testId}/{userId}")
+		public ResponseEntity<Boolean> assignTest(@PathVariable("testId") BigInteger testId,
+				@PathVariable("userId") Long userId) {
+			Boolean isAssign = service.assignTest(userId, testId);
 			ResponseEntity<Boolean> response = new ResponseEntity<>(isAssign, HttpStatus.OK);
 			return response;
 		}

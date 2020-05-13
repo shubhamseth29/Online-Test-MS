@@ -1,6 +1,5 @@
 package com.cg.testmgmt.service;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TestServiceImpl implements ITestService {
 	
+   private IUserService userService;
+	
+
+	public IUserService getUserService() {
+		return userService;
+	}
 	@Autowired
-	private IUserService userService;
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
 	private ITestDao testDao;
 	public ITestDao getTestDao() {
 		return testDao;
@@ -42,14 +50,14 @@ public class TestServiceImpl implements ITestService {
 			test = testDao.save(test);
 			return test;
 		}
-		throw new TestNotFoundException("Test not found for id=\"+testId");
+		throw new TestNotFoundException("Test not found for id="+testId);
 	}
 
 	@Override
 	public Test deleteTest(BigInteger testId) {
-		Test test1 = findById(testId);
-		testDao.delete(test1);
-		return test1;
+		Test test = findById(testId);
+		testDao.delete(test);
+		return test;
 	}
 
 	@Override
@@ -62,7 +70,9 @@ public class TestServiceImpl implements ITestService {
 		User user = userService.findById(userId);
 		user.setUserTest(test);
 		user = userService.addUser(user);
-		return true;	}
+		return true;	
+		
+	}
 
 
 	@Override

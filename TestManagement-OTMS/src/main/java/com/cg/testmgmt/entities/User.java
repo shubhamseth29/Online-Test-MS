@@ -3,6 +3,7 @@ package com.cg.testmgmt.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,6 +13,7 @@ public class User {
 	@GeneratedValue
 	private Long UserId;
 	private String UserName;
+	@OneToOne(targetEntity=Test.class)
 	private Test userTest;
 	private boolean isAdmin;
 	private String userPassword;
