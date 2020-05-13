@@ -74,10 +74,10 @@ public class UserController {
 	 {
 		 	UserDetails details=new UserDetails();
 		 	details.setUserId(user.getUserId());
-		 	user.setUserName(user.getUserName());
-			user.setUserPassword(user.getUserPassword());
-			user.setAdmin(user.isAdmin());
-			user.setUserTest(user.getUserTest());
+		 	details.setUserName(user.getUserName());
+			details.setUserPassword(user.getUserPassword());
+			details.setAdmin(user.isAdmin());
+			details.setUserTest(user.getUserTest());
 		 	return details;
 	 }
 	 

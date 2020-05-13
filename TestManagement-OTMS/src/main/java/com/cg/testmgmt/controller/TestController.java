@@ -52,6 +52,12 @@ public class TestController {
 		List<TestQuestionDto> questions =fallbackFetchQuestionsByTestId(test.getTestId());
 		details.setQuestions(questions);
 		details.setTestId(test.getTestId());
+		details.setTestTitle(test.getTestTitle());
+		details.setEndTime(test.getEndTime());
+		details.setStartTime(test.getStartTime());
+		details.setTestDuration(test.getTestDuration());
+		details.setTestTotalMarks(test.getTestTotalMarks());
+		details.setTestMarksScored(test.getTestMarksScored());
 		return details;
 	}
 	
