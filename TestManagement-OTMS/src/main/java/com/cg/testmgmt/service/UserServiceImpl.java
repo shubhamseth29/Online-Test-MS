@@ -1,5 +1,6 @@
 package com.cg.testmgmt.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.cg.testmgmt.dao.IUserDao;
@@ -57,6 +58,12 @@ public class UserServiceImpl implements IUserService {
 		userDao.delete(test);
 		return test;
 		
+	}
+
+	@Override
+	public List<User> fetchAll() {
+		List<User> users=userDao.findAll();
+		return users;
 	}
 
 }

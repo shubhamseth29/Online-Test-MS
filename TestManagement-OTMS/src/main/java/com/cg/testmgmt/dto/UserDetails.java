@@ -1,9 +1,12 @@
 package com.cg.testmgmt.dto;
 
-public class UserDto {
+import com.cg.testmgmt.entities.Test;
+
+public class UserDetails {
 	
 	private Long UserId;
 	private String UserName;
+	private Test userTest;
 	private boolean isAdmin;
 	private String userPassword;
 	public Long getUserId() {
@@ -18,11 +21,11 @@ public class UserDto {
 	public void setUserName(String userName) {
 		UserName = userName;
 	}
-	public String getUserPassword() {
-		return userPassword;
+	public Test getUserTest() {
+		return userTest;
 	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setUserTest(Test userTest) {
+		this.userTest = userTest;
 	}
 	public boolean isAdmin() {
 		return isAdmin;
@@ -30,7 +33,12 @@ public class UserDto {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
-	
-	
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
+
 }

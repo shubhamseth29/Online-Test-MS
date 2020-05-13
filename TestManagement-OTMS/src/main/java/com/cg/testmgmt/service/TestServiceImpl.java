@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cg.testmgmt.dao.ITestDao;
+import com.cg.testmgmt.dao.IUserDao;
 import com.cg.testmgmt.entities.Test;
 import com.cg.testmgmt.exception.TestNotFoundException;
 import com.cg.testmgmt.entities.User;
@@ -17,7 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TestServiceImpl implements ITestService {
 	
-   private IUserService userService;
+	private IUserDao userDao;
+	
+	
+   public IUserDao getUserDao() {
+		return userDao;
+	}
+   @Autowired
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
+	}
+
+private IUserService userService;
 	
 
 	public IUserService getUserService() {
@@ -73,6 +85,7 @@ public class TestServiceImpl implements ITestService {
 		return true;	
 		
 	}
+
 
 
 	@Override

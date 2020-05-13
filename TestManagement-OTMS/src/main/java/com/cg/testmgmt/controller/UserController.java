@@ -1,5 +1,7 @@
 package com.cg.testmgmt.controller;
 
+import java.math.BigInteger;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.testmgmt.entities.Test;
 import com.cg.testmgmt.entities.User;
 import com.cg.testmgmt.service.IUserService;
+import com.cg.testmgmt.dto.TestDetails;
+import com.cg.testmgmt.dto.UserDetails;
 import com.cg.testmgmt.dto.UserDto;
 
 @RestController
@@ -36,6 +41,7 @@ public class UserController {
 		user.setUserId(dto.getUserId());
 		user.setUserName(dto.getUserName());
 		user.setUserPassword(dto.getUserPassword());
+		user.setAdmin(dto.isAdmin());
 		return user;
 	}
 	@PutMapping("/update/{id}")
@@ -54,5 +60,26 @@ public class UserController {
 			return response;
 		}
 
+	 
+	 @GetMapping("/get/{id}")
+	 public ResponseEntity<UserDetails>getTest(@PathVariable("id")Long userId){
+			User user = service.findById(userId);
+			UserDetails details=convertToUserDetails(user);
+			ResponseEntity<UserDetails>response=new ResponseEntity<>(details, HttpStatus.OK);
+			return response;
+			
+		  }
+	 	
+	 UserDetails convertToUserDetails(User user)
+	 {
+		 	UserDetails details=new UserDetails();
+		 	details.setUserId(user.getUserId());
+		 	user.setUserName(user.getUserName());
+			user.setUserPassword(user.getUserPassword());
+			user.setAdmin(user.isAdmin());
+			user.setUserTest(user.getUserTest());
+		 	return details;
+	 }
+	 
 	
 }

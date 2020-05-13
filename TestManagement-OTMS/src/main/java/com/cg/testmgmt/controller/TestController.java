@@ -41,7 +41,6 @@ public class TestController {
 	 @GetMapping("/get/{id}")
 	  public ResponseEntity<TestDetails>getTest(@PathVariable("id") BigInteger id){
 		Test test = service.findById(id);
-		//List<TestQuestionDto> questions = fallbackFetchQuestionsByTestId(test.getTestId());
 		TestDetails details = convertToTestDetails(test);
 		ResponseEntity<TestDetails>response=new ResponseEntity<>(details, HttpStatus.OK);
 		return response;
@@ -56,15 +55,16 @@ public class TestController {
 		return details;
 	}
 	
-//	List<TestDto> convertToTestDto(Test test)
+//	List<TestDto> convertToTestDto(List<Test> tests)
 //	{
 //		TestDto dto=new TestDto();
-//		dto.setTestTitle(test.getTestTitle());
-//		dto.setTestDuration(test.getTestDuration());
-//		dto.setTestTotalMarks(test.getTestMarksScored());
-//		dto.setTestMarksScored(test.getTestMarksScored());
-//		dto.setStartTime(test.getStartTime());
-//		dto.setEndTime(test.getEndTime());
+//		dto.setTestTitle(tests.getTestTitle());
+//		dto.setTestDuration(tests.getTestDuration());
+//		dto.setTestTotalMarks(tests.getTestMarksScored());
+//		dto.setTestMarksScored(tests.getTestMarksScored());
+//		dto.setStartTime(tests.getStartTime());
+//		dto.setEndTime(tests.getEndTime());
+//		return (List<TestDto>) dto;
 //		
 //	}
 //	

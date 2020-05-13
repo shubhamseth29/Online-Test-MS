@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -14,11 +15,13 @@ public class User {
 	@GeneratedValue
 	private Long UserId;
 	@NotEmpty(message = "Name is required")
+	@Size(min=5,max=20,message="User name should be minimum 5 and maximum 20 characters long")
 	private String UserName;
 	@OneToOne(targetEntity=Test.class)
 	private Test userTest;
 	private boolean isAdmin;
 	@NotEmpty(message = "Password is required")
+	@Size(min=8,message="Password should be minimum 8 characters long")
 	private String userPassword;
 
 	public Long getUserId() {
