@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -17,8 +20,10 @@ public class Test{
 	@Id
 	@GeneratedValue
 	private BigInteger testId;
+	@NotEmpty(message = "Test title is required")
 	private String testTitle;
 	private LocalTime testDuration;
+	@Min(0)
 	private BigDecimal testTotalMarks;
 	private BigDecimal testMarksScored;
 	private LocalDateTime startTime;

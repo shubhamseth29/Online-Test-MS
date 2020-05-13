@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -12,10 +13,12 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Long UserId;
+	@NotEmpty(message = "Name is required")
 	private String UserName;
 	@OneToOne(targetEntity=Test.class)
 	private Test userTest;
 	private boolean isAdmin;
+	@NotEmpty(message = "Password is required")
 	private String userPassword;
 
 	public Long getUserId() {
