@@ -1,12 +1,13 @@
 package com.cg.testmgmt.controller;
 
-import java.math.BigInteger;
-
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.testmgmt.entities.Test;
 import com.cg.testmgmt.entities.User;
+import com.cg.testmgmt.exception.UserNotAddedException;
+import com.cg.testmgmt.exception.UserNotFoundException;
 import com.cg.testmgmt.service.IUserService;
-import com.cg.testmgmt.dto.TestDetails;
 import com.cg.testmgmt.dto.UserDetails;
 import com.cg.testmgmt.dto.UserDto;
 
@@ -26,6 +27,7 @@ import com.cg.testmgmt.dto.UserDto;
 @RequestMapping("/users")
 public class UserController {
 	
+	private static final Logger Log= LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private IUserService service;
 	@PostMapping("/add")
@@ -81,5 +83,20 @@ public class UserController {
 		 	return details;
 	 }
 	 
-	
+	 
+	  @ExceptionHandler(UserNotFoundException.class)
+	    public ResponseEntity<String>handleUserNotFound(UserNotFoundException ex){
+	        Log.error("User not found exception",ex);
+	        String msg=ex.getMessage();
+	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+	        return response;
+	    }
+	 
+	 @ExceptionHandler(UserNotAddedException.class)
+	    public ResponseEntity<String>handleUserNotAdded(UserNotAddedException ex){
+	        Log.error("User not added exception",ex);
+	        String msg=ex.getMessage();
+	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+	        return response;
+	    }
 }

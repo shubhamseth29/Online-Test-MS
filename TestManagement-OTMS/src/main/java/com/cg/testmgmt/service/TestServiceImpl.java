@@ -7,7 +7,9 @@ import java.util.Optional;
 import com.cg.testmgmt.dao.ITestDao;
 import com.cg.testmgmt.dao.IUserDao;
 import com.cg.testmgmt.entities.Test;
+import com.cg.testmgmt.exception.TestNotAddedException;
 import com.cg.testmgmt.exception.TestNotFoundException;
+import com.cg.testmgmt.exception.UserNotFoundException;
 import com.cg.testmgmt.entities.User;
 
 import com.cg.testmgmt.service.IUserService;
@@ -29,7 +31,7 @@ public class TestServiceImpl implements ITestService {
 		this.userDao = userDao;
 	}
 
-private IUserService userService;
+   private IUserService userService;
 	
 
 	public IUserService getUserService() {
@@ -49,11 +51,32 @@ private IUserService userService;
 		this.testDao = testDao;
 	}
 	
+	/*
+	 ***************************************************
+	 *This method is used to add new test
+	 *************************************************** 
+	 */
+	
 	@Override
-	public Test addTest(Test test) {
-		test = testDao.save(test);
-		return test;
+	public Test addTest(Test test) 
+	{	boolean exists=testDao.existsById(test.getTestId());
+		if(!exists)
+		{
+			test = testDao.save(test);
+			return test;
+		}
+		else
+			throw new TestNotAddedException(" Test with id"+test.getTestId()+" is already added !");
+
+		
 	}
+	
+	/*
+	 ***************************************************
+	 *This method is used to update existing test
+	 *************************************************** 
+	 */
+	
 
 	@Override
 	public Test updateTest(BigInteger testId, Test test) {
@@ -64,6 +87,12 @@ private IUserService userService;
 		}
 		throw new TestNotFoundException("Test not found for id="+testId);
 	}
+	
+	/*
+	 ***************************************************
+	 *This method is used to delete existing test
+	 *************************************************** 
+	 */
 
 	@Override
 	public Test deleteTest(BigInteger testId) {
@@ -71,19 +100,36 @@ private IUserService userService;
 		testDao.delete(test);
 		return test;
 	}
+	
+	/*
+	 ***************************************************
+	 *This method is used to assign test to a user
+	 *************************************************** 
+	 */
 
 	@Override
 	public boolean assignTest(Long userId, BigInteger testId) {
 		boolean testExists = testDao.existsById(testId);
-		if (!testExists) {
-			return false;
+		boolean userExists = userDao.existsById(userId);
+		if (testExists) 
+		{
+			if(userExists)
+			{
+				Test test = findById(testId);
+				User user = userService.findById(userId);
+				user.setUserTest(test);
+				user = userService.addUser(user);
+				return true;
+			}
+			else
+			{
+				throw new UserNotFoundException("User not found for id="+userId);
+			}
 		}
-		Test test = findById(testId);
-		User user = userService.findById(userId);
-		user.setUserTest(test);
-		user = userService.addUser(user);
-		return true;	
-		
+		else
+		{
+			throw new TestNotFoundException("Test not found for id="+testId);
+		}
 	}
 
 

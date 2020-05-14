@@ -15,7 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import com.cg.testmgmt.dto.*;
 import com.cg.testmgmt.entities.Test;
+import com.cg.testmgmt.exception.TestNotAddedException;
 import com.cg.testmgmt.exception.TestNotFoundException;
+import com.cg.testmgmt.exception.UserNotFoundException;
 import com.cg.testmgmt.service.ITestService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,6 +149,24 @@ public class TestController {
 	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
 	        return response;
 	    }
+	  	
+	  
+	  @ExceptionHandler(UserNotFoundException.class)
+	    public ResponseEntity<String>handleUserNotFound(UserNotFoundException ex){
+	        Log.error("user not found exception",ex);
+	        String msg=ex.getMessage();
+	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+	        return response;
+	    }
+	  
+	  @ExceptionHandler(TestNotAddedException.class)
+	    public ResponseEntity<String>handleTestNotAdded(TestNotAddedException ex){
+	        Log.error("test not added exception",ex);
+	        String msg=ex.getMessage();
+	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+	        return response;
+	    }
+
 
 	    @ExceptionHandler(ConstraintViolationException.class)
 	    public ResponseEntity<String>handleConstraintViolate(ConstraintViolationException ex){
