@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cg.testmgmt.dao.ITestDao;
-import com.cg.testmgmt.dao.IUserDao;
 import com.cg.testmgmt.entities.Test;
 import com.cg.testmgmt.exception.TestNotAddedException;
 import com.cg.testmgmt.exception.TestNotFoundException;
-import com.cg.testmgmt.exception.UserNotFoundException;
 import com.cg.testmgmt.entities.User;
 
 import com.cg.testmgmt.service.IUserService;
@@ -19,18 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TestServiceImpl implements ITestService {
-	
-	private IUserDao userDao;
-	
-	
-   public IUserDao getUserDao() {
-		return userDao;
-	}
-   @Autowired
-	public void setUserDao(IUserDao userDao) {
-		this.userDao = userDao;
-	}
-
+   
+   
    private IUserService userService;
 	
 
@@ -59,14 +47,14 @@ public class TestServiceImpl implements ITestService {
 	
 	@Override
 	public Test addTest(Test test) 
-	{	boolean exists=testDao.existsById(test.getTestId());
-		if(!exists)
-		{
+	{	//boolean exists=testDao.existsById(test.getTestId());
+//		if(!exists)
+//		{
 			test = testDao.save(test);
 			return test;
-		}
-		else
-			throw new TestNotAddedException(" Test with id"+test.getTestId()+" is already added !");
+//		}
+//		else
+//			throw new TestNotAddedException(" Test with id"+test.getTestId()+" is already added !");
 
 		
 	}
@@ -110,21 +98,13 @@ public class TestServiceImpl implements ITestService {
 	@Override
 	public boolean assignTest(Long userId, BigInteger testId) {
 		boolean testExists = testDao.existsById(testId);
-		boolean userExists = userDao.existsById(userId);
 		if (testExists) 
 		{
-			if(userExists)
-			{
 				Test test = findById(testId);
 				User user = userService.findById(userId);
 				user.setUserTest(test);
 				user = userService.addUser(user);
 				return true;
-			}
-			else
-			{
-				throw new UserNotFoundException("User not found for id="+userId);
-			}
 		}
 		else
 		{

@@ -33,17 +33,17 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User addUser(User user) {
-		boolean exists=userDao.existsById(user.getUserId());
-		if(!exists)
-		{
+//		boolean exists=userDao.existsById(user.getUserId());
+//		if(!exists)
+//		{
 			user = userDao.save(user);
 			return user;
-		}
-		else
-		{
-			throw new UserNotAddedException("User with id"+user.getUserId()+"already exists !");
-		}
-		
+//		}
+//		else
+//		{
+//			throw new UserNotAddedException("User with id"+user.getUserId()+"already exists !");
+//		}
+//		
 	}
 	
 	/*

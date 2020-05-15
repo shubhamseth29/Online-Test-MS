@@ -7,6 +7,7 @@ import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotEmpty;
 public class Test{
 	@Id
 	@GeneratedValue
+
 	private BigInteger testId;
 	@NotEmpty(message = "Test title is required")
 	private String testTitle;

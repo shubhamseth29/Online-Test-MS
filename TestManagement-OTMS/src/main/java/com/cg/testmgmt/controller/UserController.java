@@ -35,6 +35,7 @@ public class UserController {
 	{
 		User user=convertFromDto(userDto);
 		user=service.addUser(user);
+		  Log.info("User Added ");
 		ResponseEntity<User>response=new ResponseEntity<User>(user, HttpStatus.OK);
 		return response;
 	}
@@ -51,6 +52,7 @@ public class UserController {
 		User user = convertFromDto(userDto);
 		user.setUserId(userId);
 		user = service.updateUser(userId, user);
+		  Log.info("User updated ");
 		ResponseEntity<User> response = new ResponseEntity<>(user, HttpStatus.OK);
 		return response;
 	}
@@ -58,6 +60,7 @@ public class UserController {
 	 @GetMapping("/remove/{id}")
 		public ResponseEntity<Boolean> deleteTest(@PathVariable("id") Long userId) {
 			User result = service.deleteUser(userId);
+			  Log.info("User Removed ");
 			ResponseEntity<Boolean> response = new ResponseEntity<>(true, HttpStatus.OK);
 			return response;
 		}
@@ -84,19 +87,4 @@ public class UserController {
 	 }
 	 
 	 
-	  @ExceptionHandler(UserNotFoundException.class)
-	    public ResponseEntity<String>handleUserNotFound(UserNotFoundException ex){
-	        Log.error("User not found exception",ex);
-	        String msg=ex.getMessage();
-	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
-	        return response;
-	    }
-	 
-	 @ExceptionHandler(UserNotAddedException.class)
-	    public ResponseEntity<String>handleUserNotAdded(UserNotAddedException ex){
-	        Log.error("User not added exception",ex);
-	        String msg=ex.getMessage();
-	        ResponseEntity<String>response=new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
-	        return response;
-	    }
 }
