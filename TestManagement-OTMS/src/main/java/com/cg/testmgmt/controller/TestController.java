@@ -19,6 +19,7 @@ import com.cg.testmgmt.exception.TestNotAddedException;
 import com.cg.testmgmt.exception.TestNotFoundException;
 import com.cg.testmgmt.exception.UserNotFoundException;
 import com.cg.testmgmt.service.ITestService;
+import com.cg.testmgmt.util.Util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -43,7 +45,7 @@ public class TestController {
 	 @GetMapping("/get/{id}")
 	  public ResponseEntity<TestDetails>getTest(@PathVariable("id") BigInteger id){
 		Test test = service.findById(id);
-		TestDetails details = convertToTestDetails(test);
+		TestDetails details = Util.convertToTestDetails(test);
 		Log.info("Test Fetched");
 		ResponseEntity<TestDetails>response=new ResponseEntity<>(details, HttpStatus.OK);
 		System.out.println("This is detail"+details);
@@ -51,54 +53,23 @@ public class TestController {
 		
 	  }
 	 
-	TestDetails convertToTestDetails(Test test){
-		TestDetails details = new TestDetails();
-		List<TestQuestionDto> questions =fallbackFetchQuestionsByTestId(test.getTestId());
-		details.setQuestions(questions);
-		details.setTestId(test.getTestId());
-		details.setTestTitle(test.getTestTitle());
-		details.setEndTime(test.getEndTime());
-		details.setStartTime(test.getStartTime());
-		details.setTestDuration(test.getTestDuration());
-		details.setTestTotalMarks(test.getTestTotalMarks());
-		//details.setTestMarksScored(test.getTestMarksScored());
-		return details;
-	}
 	
-//	List<TestDto> convertToTestDto(List<Test> tests)
-//	{
-//		TestDto dto=new TestDto();
-//		dto.setTestTitle(tests.getTestTitle());
-//		dto.setTestDuration(tests.getTestDuration());
-//		dto.setTestTotalMarks(tests.getTestMarksScored());
-//		dto.setTestMarksScored(tests.getTestMarksScored());
-//		dto.setStartTime(tests.getStartTime());
-//		dto.setEndTime(tests.getEndTime());
-//		return (List<TestDto>) dto;
-//		
-//	}
-//	
-//	 @GetMapping
-//	   public ResponseEntity<List<TestDto>>fetchAll(){
-//	       List<Test> tests=service.fetchAll();
-//	       	List<TestDto> dto=convertToTestDto(tests);
-//	       ResponseEntity<List<TestDto>>response=new ResponseEntity<>(dto,HttpStatus.OK);
-//	       return response;
-//	   }
-//	 
+	
+
+	 @GetMapping
+	 @ResponseStatus(HttpStatus.OK)
+	   public List<TestDto>fetchAll(){
+	       List<Test> tests=service.fetchAll();
+	       	List<TestDto> allTests=Util.tests(tests);
+	       
+	       return allTests;
+	   }
 	 
-	 public  List<TestQuestionDto> fallbackFetchQuestionsByTestId(BigInteger testId){
-		 TestQuestionDto question = new TestQuestionDto();
-		 question.setQuestionId(BigInteger.valueOf(1));
-		 question.setQuestionTitle("java");
-		 List<TestQuestionDto> list = new ArrayList<>();
-		 list.add(question);
-		return list;
-		 
-	 }
+	 
+	
 	 @PostMapping("/add")
 	    public ResponseEntity<Test>createTest(@RequestBody @Valid TestDto testDto){
-	       Test test = convertFromDto(testDto);
+	       Test test = Util.convertFromDto(testDto);
 	       test=service.addTest(test);
 	       Log.info("Test created ");
 	        ResponseEntity<Test>response=new ResponseEntity<>(test, HttpStatus.OK);
@@ -117,7 +88,7 @@ public class TestController {
 
 	 @PutMapping("/update/{id}")
 		public ResponseEntity<Test> updateTest(@PathVariable("id") BigInteger testId, @RequestBody @Valid TestDto testDto) {
-			Test test = convertFromDto(testDto);
+			Test test = Util.convertFromDto(testDto);
 			test.setTestId(testId);
 			test = service.updateTest(testId, test);
 			  Log.info("Test updated ");
@@ -136,16 +107,6 @@ public class TestController {
 
 		
 		
-		public Test  convertFromDto(TestDto dto) {
-			Test test = new Test();
-			test.setEndTime(dto.getEndTime());
-			test.setStartTime(dto.getStartTime());
-			test.setTestDuration(dto.getTestDuration());
-			//test.setTestMarksScored(dto.getTestMarksScored());
-			test.setTestTitle(dto.getTestTitle());
-			test.setTestTotalMarks(dto.getTestTotalMarks());
-			return test;
-		}
-	 
+		
 	 
 }
