@@ -39,6 +39,11 @@ public class UserDetails {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+	@Override
+	public String toString() {
+		return "UserDetails [UserId=" + UserId + ", UserName=" + UserName + ", userTest=" + userTest + ", isAdmin="
+				+ isAdmin + ", userPassword=" + userPassword + "]";
+	}
 
 
 }

@@ -2,7 +2,7 @@ package com.cg.testmgmt.dto;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.time.LocalTime;
 
 public class TestDto {
@@ -11,9 +11,9 @@ public class TestDto {
 	private String testTitle;
 	private LocalTime testDuration;
 	private BigDecimal testTotalMarks;
-	private BigDecimal testMarksScored;
-	private LocalDateTime startTime;
-	private LocalDateTime endTime;
+	//private BigDecimal testMarksScored;
+	private Date startTime;
+	private Date endTime;
 
 	public String getTestTitle() {
 		return testTitle;
@@ -39,27 +39,29 @@ public class TestDto {
 		this.testTotalMarks = testTotalMarks;
 	}
 
-	public BigDecimal getTestMarksScored() {
-		return testMarksScored;
-	}
+//	public BigDecimal getTestMarksScored() {
+//		return testMarksScored;
+//	}
+//
+//	public void setTestMarksScored(BigDecimal testMarksScored) {
+//		this.testMarksScored = testMarksScored;
+//	}
 
-	public void setTestMarksScored(BigDecimal testMarksScored) {
-		this.testMarksScored = testMarksScored;
-	}
-
-	public LocalDateTime getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	
+
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 
@@ -71,4 +73,9 @@ public class TestDto {
 		this.testId = testId;
 	}
 
+	@Override
+	public String toString() {
+		return "TestDto [testId=" + testId + ", testTitle=" + testTitle + ", testDuration=" + testDuration
+				+ ", testTotalMarks=" + testTotalMarks + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+	}
 }

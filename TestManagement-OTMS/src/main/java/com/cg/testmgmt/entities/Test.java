@@ -1,18 +1,17 @@
 package com.cg.testmgmt.entities;
 
 import java.math.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -27,9 +26,11 @@ public class Test{
 	private LocalTime testDuration;
 	@Min(0)
 	private BigDecimal testTotalMarks;
-	private BigDecimal testMarksScored;
-	private LocalDateTime startTime;
-	private LocalDateTime endTime;
+	//private BigDecimal testMarksScored;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
+	private Date startTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
+	private Date endTime;
 	
 	public BigInteger getTestId() {
 		return testId;
@@ -63,28 +64,34 @@ public class Test{
 		this.testTotalMarks = testTotalMarks;
 	}
 
-	public BigDecimal getTestMarksScored() {
-		return testMarksScored;
-	}
+//	public BigDecimal getTestMarksScored() {
+//		return testMarksScored;
+//	}
+//
+//	public void setTestMarksScored(BigDecimal testMarksScored) {
+//		this.testMarksScored = testMarksScored;
+//	}
 
-	public void setTestMarksScored(BigDecimal testMarksScored) {
-		this.testMarksScored = testMarksScored;
-	}
-
-	public LocalDateTime getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Test [testId=" + testId + ", testTitle=" + testTitle + ", testDuration=" + testDuration
+				+ ", testTotalMarks=" + testTotalMarks + ", startTime=" + startTime + ", endTime=" + endTime + "]";
 	}
 
 

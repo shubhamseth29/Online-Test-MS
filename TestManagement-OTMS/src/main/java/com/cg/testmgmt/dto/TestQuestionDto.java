@@ -1,7 +1,7 @@
 package com.cg.testmgmt.dto;
 
 import java.math.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.time.LocalTime;
 
 public class TestQuestionDto {

@@ -2,6 +2,11 @@ package com.cg.testmgmt.dto;
 
 public class UserDto {
 	
+	@Override
+	public String toString() {
+		return "UserDto [UserId=" + UserId + ", UserName=" + UserName + ", isAdmin=" + isAdmin + ", userPassword="
+				+ userPassword + "]";
+	}
 	private Long UserId;
 	private String UserName;
 	private boolean isAdmin;

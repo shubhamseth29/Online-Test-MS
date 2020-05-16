@@ -11,6 +11,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "users")
 public class User {
+	@Override
+	public String toString() {
+		return "User [UserId=" + UserId + ", UserName=" + UserName + ", userTest=" + userTest + ", isAdmin=" + isAdmin
+				+ ", userPassword=" + userPassword + "]";
+	}
+
 	@Id
 	@GeneratedValue
 	private Long UserId;

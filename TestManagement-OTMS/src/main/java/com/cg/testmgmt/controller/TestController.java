@@ -44,7 +44,9 @@ public class TestController {
 	  public ResponseEntity<TestDetails>getTest(@PathVariable("id") BigInteger id){
 		Test test = service.findById(id);
 		TestDetails details = convertToTestDetails(test);
+		Log.info("Test Fetched");
 		ResponseEntity<TestDetails>response=new ResponseEntity<>(details, HttpStatus.OK);
+		System.out.println("This is detail"+details);
 		return response;
 		
 	  }
@@ -59,7 +61,7 @@ public class TestController {
 		details.setStartTime(test.getStartTime());
 		details.setTestDuration(test.getTestDuration());
 		details.setTestTotalMarks(test.getTestTotalMarks());
-		details.setTestMarksScored(test.getTestMarksScored());
+		//details.setTestMarksScored(test.getTestMarksScored());
 		return details;
 	}
 	
@@ -100,6 +102,7 @@ public class TestController {
 	       test=service.addTest(test);
 	       Log.info("Test created ");
 	        ResponseEntity<Test>response=new ResponseEntity<>(test, HttpStatus.OK);
+	        System.out.println(testDto);
 	        return response;
 	      
 	   }
@@ -138,7 +141,7 @@ public class TestController {
 			test.setEndTime(dto.getEndTime());
 			test.setStartTime(dto.getStartTime());
 			test.setTestDuration(dto.getTestDuration());
-			test.setTestMarksScored(dto.getTestMarksScored());
+			//test.setTestMarksScored(dto.getTestMarksScored());
 			test.setTestTitle(dto.getTestTitle());
 			test.setTestTotalMarks(dto.getTestTotalMarks());
 			return test;

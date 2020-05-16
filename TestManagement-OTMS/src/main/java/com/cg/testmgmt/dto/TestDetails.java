@@ -2,13 +2,20 @@ package com.cg.testmgmt.dto;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.time.LocalTime;
 import java.util.List;
 
 import com.cg.testmgmt.dto.TestQuestionDto;
 
 public class TestDetails {
+	@Override
+	public String toString() {
+		return "TestDetails [questions=" + questions + ", testId=" + testId + ", testTitle=" + testTitle
+				+ ", testDuration=" + testDuration + ", testTotalMarks=" + testTotalMarks + ", testMarksScored="
+				+ testMarksScored + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+	}
+
 	private List<TestQuestionDto> questions;
 
 	public List<TestQuestionDto> getQuestions() {
@@ -33,8 +40,8 @@ public class TestDetails {
 	private LocalTime testDuration;
 	private BigDecimal testTotalMarks;
 	private BigDecimal testMarksScored;
-	private LocalDateTime startTime;
-	private LocalDateTime endTime;
+	private Date startTime;
+	private Date endTime;
 
 	public String getTestTitle() {
 		return testTitle;
@@ -68,19 +75,19 @@ public class TestDetails {
 		this.testMarksScored = testMarksScored;
 	}
 
-	public LocalDateTime getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 

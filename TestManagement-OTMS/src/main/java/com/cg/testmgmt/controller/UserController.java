@@ -36,6 +36,7 @@ public class UserController {
 		User user=convertFromDto(userDto);
 		user=service.addUser(user);
 		  Log.info("User Added ");
+		  System.out.println(user);
 		ResponseEntity<User>response=new ResponseEntity<User>(user, HttpStatus.OK);
 		return response;
 	}
