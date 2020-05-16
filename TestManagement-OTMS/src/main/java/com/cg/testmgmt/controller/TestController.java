@@ -61,6 +61,8 @@ public class TestController {
 	   public List<TestDto>fetchAll(){
 	       List<Test> tests=service.fetchAll();
 	       	List<TestDto> allTests=Util.tests(tests);
+	       	Log.info("All Tests Fetched");
+	       	System.out.println(allTests);
 	       
 	       return allTests;
 	   }
