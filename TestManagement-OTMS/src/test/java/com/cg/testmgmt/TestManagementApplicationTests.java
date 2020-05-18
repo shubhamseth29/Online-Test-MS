@@ -1,4 +1,4 @@
-package com.cg.testmgmt.service;
+package com.cg.testmgmt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
