@@ -1,0 +1,43 @@
+<div class="container">
+<h1><i><b>FIND TEST</b></i></h1>  
+<form #data="ngForm" (ngSubmit)="findTestById(data)">
+<div class="form-group">    
+     <label>Test Id</label>
+     <input minlength="1" type="number" name="testId" class="form-control" required ngModel #testId="ngModel">
+</div>
+
+<div *ngIf="testId.errors && (testId.dirty || testId.touched)" class="alert alert-danger">
+     <div [hidden]="!testId.errors.required">
+          Test Id is required
+     </div>
+</div>
+
+<br>
+
+<input type="submit" value="Find Test" class="btn btn-primary">
+
+</form>
+
+<div *ngIf="foundStatus==='found'">
+     <h3>Test Found</h3>
+     testId = {{foundTest.testId}}
+     <br>
+     testTitle = {{foundTest.testTitle}}
+     <br>
+     testTotalMarks = {{foundTest.testTotalMarks}}
+     <br>
+     testDuration={{foundTest.testDuration}}
+     <br>
+     testStartTime={{foundTest.testStartTime  | date:'MM/dd/yyyy @ h:mma'}}
+     <br>
+     testEndTime={{foundTest.testEndTime | date:'MM/dd/yyyy @ h:mma'}}
+     
+     </div> 
+     
+     <div *ngIf="foundStatus==='Not Found'">
+          
+        <h3>Test does not exist !!</h3>
+                
+          </div> 
+
+</div>

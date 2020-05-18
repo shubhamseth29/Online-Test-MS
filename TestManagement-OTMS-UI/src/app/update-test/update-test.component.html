@@ -1,0 +1,116 @@
+<div class="container">
+
+     <h1><i><b>UPDATE TEST</b></i></h1>
+ 
+ <form #data="ngForm" (ngSubmit)="updateTest(data)">
+ 
+     <div class="form-group">
+ 
+         <label>TEST ID: </label>
+ 
+         <input required minlength="1" type="number" #id='ngModel' name="id" ngModel class="form-control">
+ 
+         <div *ngIf='id.errors && (id.dirty || id.touched)' class="alert alert-danger">
+ 
+             <div [hidden]='!id.errors.required'>Provide Test Id </div>
+ 
+         </div>
+     </div>
+ 
+ 
+ 
+     <div class="form-group">
+ 
+         <label>TEST TITLE: </label>
+ 
+         <input required minlength="1" type="text" #title='ngModel' name="title" ngModel class="form-control">
+ 
+         <div *ngIf='title.errors && title.touched' class="alert alert-danger">
+ 
+             <div [hidden]='!title.errors.required'> Provide Test  Title</div>
+ 
+         </div>
+ 
+     </div>
+ 
+     <div class="form-group">
+ 
+         <label>TEST DURATION: </label>
+ 
+         <input required minlength="1" length="10" type="text" #duration='ngModel' name="duration" ngModel class="form-control">
+ 
+         <div *ngIf='duration.errors && duration.touched' class="alert alert-danger">
+ 
+             <div [hidden]='!duration.errors.required'> Provide Test Duration </div>
+ 
+         </div>
+     </div>
+ 
+     <div class="form-group">
+ 
+         <label>TOTAL MARKS: </label>
+ 
+         <input required minlength="1" type="number" #totalMarks='ngModel' name="totalMarks" ngModel class="form-control">
+ 
+         <div *ngIf='totalMarks.errors && totalMarks.touched' class="alert alert-danger">
+ 
+             <div [hidden]='!totalMarks.errors.required'> Provide Test Total Marks </div>
+ 
+ 
+         </div>
+     </div>
+ 
+     <div class="form-group">
+ 
+         <label>START TIME </label>
+ 
+         <input required minlength="1" type="datetime-local" #startTime='ngModel' name="startTime" ngModel
+             class="form-control">
+ 
+         <div *ngIf='startTime.errors
+                     && startTime.touched' class="alert alert-danger">
+ 
+             <div [hidden]='!startTime.errors.required'>
+ 
+                 Provide Test Start Time
+ 
+             </div>
+ 
+         </div>
+ 
+     </div>
+     <div class="form-group">
+ 
+         <label>END TIME </label>
+ 
+         <input required minlength="1" type="datetime-local" #endTime='ngModel' name="endTime" ngModel
+             class="form-control">
+ 
+         <div *ngIf='endTime.errors
+                     && endTime.touched' class="alert alert-danger">
+ 
+             <div [hidden]='!endTime.errors.required'>
+ 
+                 Provide Test End Time
+ 
+             </div>
+ 
+         </div>
+ 
+     </div>
+     <input [disabled]="data.invalid" type="submit" value="Update Test" class="btn btn-primary">
+ 
+ </form>
+ 
+ </div>
+ <div *ngIf="updatedTest!=null">
+         <h3>Test Updated</h3>  
+          Test Id= {{updatedTest.testId}}
+          Test Title={{updatedTest.testTitle}}
+          Test Start Time={{updatedTest.testStartTime | date:'MM/dd/yyyy @ h:mma'}}
+          Test End Time={{updatedTest.testEndTime | date:'MM/dd/yyyy @ h:mma'}}
+         
+         
+ </div>
+ 
+ 

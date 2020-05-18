@@ -1,0 +1,27 @@
+<div class="container">
+    <br>
+    <h1 style="text-align: center;"><i><b>ALL TESTS</b></i></h1>
+<div class="form-group">
+    <div class= "container">
+        <table class ="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Test Id</th>
+                    <th>Test Title</th>
+                    <th>Test Total Marks</th>
+                </tr>
+        
+            </thead>
+            <tbody *ngFor="let test of tests">
+                <tr>
+                    
+                    <td>{{test.testId}}</td>
+                    <td>{{test.testTitle}}</td>
+                    <td>{{test.testTotalMarks}}</td>
+                 </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>

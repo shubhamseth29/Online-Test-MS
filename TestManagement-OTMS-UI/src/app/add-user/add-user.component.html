@@ -1,0 +1,77 @@
+<div class="container">
+    <h1>Add User</h1>  
+    <form #data="ngForm" (ngSubmit)="data.valid && addUser(data)">
+
+        <div class="form-group">
+
+            <label class="form-group-label">User Id: </label>
+    
+            <input required minlength="1" type="number" #id='ngModel' name="id" ngModel class="form-control">
+    
+            <div *ngIf='id.errors && (id.dirty || id.touched)' class="alert alert-danger">
+    
+                <div [hidden]='!id.errors.required'>User Id is required. </div>
+    
+            </div>
+        </div>
+    
+     
+    <div class="form-group">    
+        <label>User Name</label>
+        <input type="text" name="userName" class="form-control" required minlength="5" maxlength="20" ngModel #userName="ngModel" class="form-control">
+    </div>
+    
+    <div *ngIf="userName.errors && (userName.dirty || userName.touched)" class="alert alert-danger">
+        <div [hidden]="!userName.errors.required" class="alert alert-danger">
+            User Name is required !
+          </div>
+          <div [hidden]="!userName.errors.minlength" class="alert alert-danger">
+            Minimum length should be 5
+            </div>
+   </div>
+        
+     <div class="form-group">
+         <label>User password</label>
+         <input type="password" ngModel name="userPassword" class="form-control" required minlength="8"
+         ngModel #userPassword="ngModel"class="form-control" >
+    </div>
+    
+    <div *ngIf="userPassword.errors && (userPassword.dirty || userPassword.touched)" class="alert alert-danger">
+        <div [hidden]="!userPassword.errors.required" class="alert alert-danger">
+            User password is required !
+          </div>
+          <div [hidden]="!userPassword.errors.minlength" class="alert alert-danger">
+            Minimum length should be 8
+            </div>
+    </div>
+    
+    
+    <br>
+    
+    <div class="form-group">    
+         <label>User is-:</label>
+         <br>
+         <input type="radio" ngModel name="isAdmin"  #isAdmin="ngModel" value="true" /> Admin
+
+         <input type="radio" ngModel name="isAdmin" #isAdmin="ngModel" value="false"/> Not Admin
+    </div>
+    <br>
+    
+    <input type="submit" value="Add User" class="btn btn-success">
+    
+    </form>
+    <br>
+     
+    <div *ngIf="addedUser!=null">
+    <h3>User Added
+    </h3>
+    userId = {{addedUser.userId}}
+    <br>
+    userName = {{addedUser.userName}}
+    <br>
+    isAdmin = {{addedUser.isAdmin}}
+    <br>
+    
+    </div> 
+  
+</div>
