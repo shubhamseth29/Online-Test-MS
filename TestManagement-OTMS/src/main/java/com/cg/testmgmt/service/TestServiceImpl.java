@@ -18,17 +18,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TestServiceImpl implements ITestService {
    
-   
+   @Autowired
    private IUserService userService;
 	
 
-	public IUserService getUserService() {
-		return userService;
-	}
-	@Autowired
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
+//	public IUserService getUserService() {
+//		return userService;
+//	}
+//	@Autowired
+//	public void setUserService(IUserService userService) {
+//		this.userService = userService;
+//	}
 
 	private ITestDao testDao;
 	public ITestDao getTestDao() {

@@ -80,7 +80,7 @@ public class TestController {
 	      
 	   }
 	 
-	 @GetMapping("/remove/{id}")
+	 @GetMapping("/delete/{id}")
 		public ResponseEntity<Boolean> deleteTest(@PathVariable("id") BigInteger testId) {
 			Test result = service.deleteTest(testId);
 			  Log.info("Test removed");
