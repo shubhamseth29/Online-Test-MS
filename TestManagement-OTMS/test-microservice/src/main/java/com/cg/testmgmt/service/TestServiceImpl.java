@@ -46,16 +46,9 @@ public class TestServiceImpl implements ITestService {
 	
 	@Override
 	public Test addTest(Test test) 
-	{	//boolean exists=testDao.existsById(test.getTestId());
-//		if(!exists)
-//		{
+	{	
 			test = testDao.save(test);
 			return test;
-//		}
-//		else
-//			throw new TestNotAddedException(" Test with id"+test.getTestId()+" is already added !");
-
-		
 	}
 	
 	/*

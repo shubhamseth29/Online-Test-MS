@@ -93,6 +93,30 @@ public class Test{
 		return "Test [testId=" + testId + ", testTitle=" + testTitle + ", testDuration=" + testDuration
 				+ ", testTotalMarks=" + testTotalMarks + ", startTime=" + startTime + ", endTime=" + endTime + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((testId == null) ? 0 : testId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Test other = (Test) obj;
+		if (testId == null) {
+			if (other.testId != null)
+				return false;
+		} else if (!testId.equals(other.testId))
+			return false;
+		return true;
+	}
 
 
 }
