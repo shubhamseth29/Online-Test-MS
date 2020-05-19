@@ -1,0 +1,27 @@
+<div class="container">
+    <br>
+    <h1 style="text-align: center;"><i><b><span class="badge badge-dark">ALL USERS</span></b></i></h1>
+<div class="form-group">
+    <div class= "container">
+        <table class ="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>Test Assigned</th>
+                </tr>
+        
+            </thead>
+            <tbody *ngFor="let user of users">
+                <tr>
+                    
+                    <td>{{user.userId}}</td>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.userTest.testTitle}}</td>
+                 </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>

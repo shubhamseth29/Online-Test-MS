@@ -11,6 +11,9 @@ import { UpdateTestComponent } from './update-test/update-test.component';
 import { FindTestComponent } from './find-test/find-test.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AllTestsComponent } from './all-tests/all-tests.component';
+import { AssignTestComponent } from './assign-test/assign-test.component';
+import { HomeComponent } from './home/home.component';
+import { AllUsersComponent } from './all-users/all-users.component';
 
 
 
@@ -21,7 +24,10 @@ import { AllTestsComponent } from './all-tests/all-tests.component';
     UpdateTestComponent,
     FindTestComponent,
     AddUserComponent,
-    AllTestsComponent
+    AllTestsComponent,
+    AssignTestComponent,
+    HomeComponent,
+    AllUsersComponent
   ],
   imports: [
     BrowserModule,

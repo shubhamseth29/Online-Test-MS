@@ -1,6 +1,6 @@
 <div class="container">
     <br>
-    <h1 style="text-align: center;"><i><b>ALL TESTS</b></i></h1>
+    <h1 style="text-align: center;"><i><b><span class="badge badge-dark">ALL TESTS</span></b></i></h1>
 <div class="form-group">
     <div class= "container">
         <table class ="table">
@@ -9,6 +9,7 @@
                     <th>Test Id</th>
                     <th>Test Title</th>
                     <th>Test Total Marks</th>
+                    <th>Delete Test</th>
                 </tr>
         
             </thead>
@@ -18,6 +19,10 @@
                     <td>{{test.testId}}</td>
                     <td>{{test.testTitle}}</td>
                     <td>{{test.testTotalMarks}}</td>
+                    <td>
+                        
+                        <i (click)="deleteTest(test)" class="fa fa-trash-o" style="font-size:48px;color:red"></i>
+                    </td>
                  </tr>
             </tbody>
         </table>

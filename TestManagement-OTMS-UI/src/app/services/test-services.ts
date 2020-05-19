@@ -71,4 +71,38 @@ baseUserUrl="http://localhost:8087/users";
     return observable;
   }
 
+  
+    /**
+   * fires get request to server to delete test for id mentioned in url
+   * @param id of test which has to be deleted
+   */
+
+  deleteTestById(id:number){
+    let url=this.baseTestUrl+"/delete/"+id;
+    let result:Observable<Test>=this.client.get<Test>(url);
+    return result;
+  }
+
+    /**
+   * fires get request to server to assign test for id mentioned in url
+   * @param id of test which has to be assigned
+   */
+
+   assignTest(testId:number,userId:number)
+   {
+     let url=this.baseTestUrl+"/assign/"+testId+"/"+userId;
+     let result:Observable<Test>=this.client.get<Test>(url);
+     return result;
+   }
+
+         /**
+   * fires get request to get all users
+   */
+
+  fetchAllUsers():Observable<User[]>{
+    let url = this.baseUserUrl;
+    let observable : Observable<User[]>=this.client.get<User[]>(url);
+    return observable;
+  }
+
 }

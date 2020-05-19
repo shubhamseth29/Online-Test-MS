@@ -5,6 +5,8 @@ import { FindTestComponent } from './find-test/find-test.component';
 import { UpdateTestComponent } from './update-test/update-test.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AllTestsComponent } from './all-tests/all-tests.component';
+import { AssignTestComponent } from './assign-test/assign-test.component';
+import { AllUsersComponent } from './all-users/all-users.component';
 
 
 const routes: Routes = 
@@ -28,6 +30,14 @@ const routes: Routes =
   {
     path:'all-tests',
     component:AllTestsComponent
+  },
+  {
+    path:'assign-test',
+    component:AssignTestComponent
+  },
+  {
+    path:'all-users',
+    component:AllUsersComponent
   }
 ];
 

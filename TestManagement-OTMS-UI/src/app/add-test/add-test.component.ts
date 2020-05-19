@@ -21,7 +21,6 @@ export class AddTestComponent implements OnInit {
   addTest(form:any)
   {
     let details=form.value;
-    let testId=details.id;
     let testTitle=details.title;
     let testTotalMarks=details.totalMarks;
     let testDuration=details.duration;
@@ -29,7 +28,6 @@ export class AddTestComponent implements OnInit {
     let testEndTime=details.endTime;
 
     this.addedTest=new Test();
-    this.addedTest.testId=testId;
     this.addedTest.testTotalMarks=testTotalMarks;
     this.addedTest.testTitle=testTitle;
     this.addedTest.testDuration=testDuration;
@@ -44,6 +42,7 @@ export class AddTestComponent implements OnInit {
     },
     err=>{
       console.log("error="+err)
+      console.log(testStartTime);
     }
     );
     

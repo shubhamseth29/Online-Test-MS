@@ -1,9 +1,9 @@
 <div class="container">
-<h1><i><b>FIND TEST</b></i></h1>  
+<h1><i><b><span class="badge badge-dark"></span>FIND TEST</b></i></h1>  
 <form #data="ngForm" (ngSubmit)="findTestById(data)">
 <div class="form-group">    
      <label>Test Id</label>
-     <input minlength="1" type="number" name="testId" class="form-control" required ngModel #testId="ngModel">
+     <input  required  min="0" minlength="1" type="number"  name="testId" class="form-control" #testId="ngModel" ngModel  >
 </div>
 
 <div *ngIf="testId.errors && (testId.dirty || testId.touched)" class="alert alert-danger">
@@ -12,14 +12,14 @@
      </div>
 </div>
 
-<br>
+
 
 <input type="submit" value="Find Test" class="btn btn-primary">
 
 </form>
 
 <div *ngIf="foundStatus==='found'">
-     <h3>Test Found</h3>
+     <div class="alert alert-success" role="alert"> <h3 style="text-align: center;">Test Found</h3>  </div>
      testId = {{foundTest.testId}}
      <br>
      testTitle = {{foundTest.testTitle}}
@@ -27,16 +27,16 @@
      testTotalMarks = {{foundTest.testTotalMarks}}
      <br>
      testDuration={{foundTest.testDuration}}
-     <br>
+     <!-- <br>
      testStartTime={{foundTest.testStartTime  | date:'MM/dd/yyyy @ h:mma'}}
      <br>
-     testEndTime={{foundTest.testEndTime | date:'MM/dd/yyyy @ h:mma'}}
+     testEndTime={{foundTest.testEndTime | date:'MM/dd/yyyy @ h:mma'}} -->
      
      </div> 
      
      <div *ngIf="foundStatus==='Not Found'">
           
-        <h3>Test does not exist !!</h3>
+          <div class="alert alert-danger" role="alert"> <h3 style="text-align: center;">Test Does Not Exist</h3>  </div>
                 
           </div> 
 

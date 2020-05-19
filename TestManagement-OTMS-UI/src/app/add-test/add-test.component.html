@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1><i><b>ADD TEST</b></i></h1>
+    <h1><i><b><span class="badge badge-dark">ADD TEST</span></b></i></h1>
 
 <form #data="ngForm" (ngSubmit)="addTest(data)">
 
@@ -35,13 +35,14 @@
 
     <div class="form-group">
 
-        <label>TEST DURATION: </label>
+        <label>TEST DURATION: (hh:mm) </label>
 
-        <input required minlength="1" length="10" type="text" #duration='ngModel' name="duration" ngModel class="form-control">
+        <input required minlength="1" pattern="^[0-2][0-3]:[0-5][0-9]$" length="10" type="text" #duration='ngModel' name="duration" ngModel class="form-control">
 
         <div *ngIf='duration.errors && duration.touched' class="alert alert-danger">
 
             <div [hidden]='!duration.errors.required'> Provide Test Duration </div>
+            <div [hidden]='!duration.errors.pattern'> HH:MM Format only.</div>
 
         </div>
     </div>
@@ -50,7 +51,7 @@
 
         <label>TOTAL MARKS: </label>
 
-        <input required minlength="1" type="number" #totalMarks='ngModel' name="totalMarks" ngModel class="form-control">
+        <input required min="0" minlength="1" type="number" #totalMarks='ngModel' name="totalMarks" ngModel class="form-control">
 
         <div *ngIf='totalMarks.errors && totalMarks.touched' class="alert alert-danger">
 
@@ -65,10 +66,10 @@
         <label>START TIME </label>
 
         <input required minlength="1" type="datetime-local" #startTime='ngModel' name="startTime" ngModel
-            class="form-control">
+            class="form-control" >
 
         <div *ngIf='startTime.errors
-                    && startTime.touched' class="alert alert-danger">
+                    && startTime.touched' class="alert alert-danger" >
 
             <div [hidden]='!startTime.errors.required'>
 
@@ -104,12 +105,6 @@
 
 </div>
 <div *ngIf="addedTest!=null">
-        <h3>Test Added</h3>  
-         Test Id= {{addedTest.testId}}
-         Test Title={{addedTest.testTitle}}
-         Test Start Time={{addedTest.testStartTime | date:'MM/dd/yyyy @ h:mma'}}
-         Test End Time={{addedTest.testEndTime | date:'MM/dd/yyyy @ h:mma'}}
-        
-        
+       <div class="alert alert-success" role="alert"> <h3 style="text-align: center;">Test Added</h3>  </div>
 </div>
 

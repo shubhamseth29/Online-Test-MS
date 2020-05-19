@@ -18,6 +18,7 @@ export class UpdateTestComponent implements OnInit {
   }
 
   updatedTest:Test=null;
+  status=null;
   updateTest(form:any)
   {
     let details=form.value;
@@ -39,9 +40,14 @@ export class UpdateTestComponent implements OnInit {
     let result:Observable<Test>=this.service.updateTest(testId,this.updatedTest);
     result.subscribe((test:Test)=>{
       this.updatedTest=test;
+      this.status="true";
+
     },
     err=>{
+
+      this.status="false";
       console.log("error="+err)
+      
     }
     );
     

@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 style="text-align: center;"><i><b><span class="badge badge-dark">ASSIGN TEST</span></b></i></h1>
+    <form #data="ngForm" (ngSubmit)="assignTest(data)">
+        <div class="row">
+            <div class="col-sm form-group">
+                <label>Enter the Test Id to be assigned:</label>
+                <input min="0" type="number" name="testId" required #testId="ngModel" ngModel class="form-control" >
+            </div>
+            
+            <div *ngIf="testId.errors && (testId.dirty || testId.touched)" class="alert alert-danger">
+                <div [hidden]="!testId.errors.required">
+                    Test Id is required
+                </div>
+            </div>
+            <div class="col-sm form-group">
+                <label>Enter the User Id to assign the Test:</label>
+                <input min="0" type="number" name="userId" required #userId="ngModel" ngModel class="form-control"> 
+            </div>
+            <div *ngIf="userId.errors && (userId.dirty || userId.touched)" class="alert alert-danger">
+                <div [hidden]="!userId.errors.required">
+                    User Id is required
+                </div>
+            </div>
+        </div>
+        <input style="margin-left: 46%;" type="submit" value="Assign Test" class="btn btn-primary">
+
+    </form>
+    <br>
+    <div *ngIf="assigned==='true'">
+        <div class="alert alert-success" role="alert"> <h3 style="text-align: center;">Test Assigned</h3>  
+    </div>
+    </div>
+    <div *ngIf="assigned==='false'">
+        <div class="alert alert-danger" role="alert"> <h3 style="text-align: center;">Please enter correct Id !</h3> 
+            </div> 
+    </div>
